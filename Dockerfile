@@ -1,7 +1,6 @@
 FROM node
 WORKDIR /usr/app
 COPY package.json ./
-COPY package.json ./
 COPY .env ./
 COPY tsconfig.json ./
 COPY prisma ./prisma/

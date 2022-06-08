@@ -16,13 +16,18 @@ export class CreateUserUseCase {
     email,
     password,
   }: ICreateUserDTO): Promise<IUser> {
+    const userExists = await this.usersRepository.findByEmail(email);
+    if (userExists) {
+      throw new Error('User already exists');
+    }
+
     const encryptedPassword = await hash(password, 8);
-    console.log(encryptedPassword);
+
     const user = await this.usersRepository.create({
       gh_username,
       name,
       email,
-      password,
+      password: encryptedPassword,
     });
 
     return user;
