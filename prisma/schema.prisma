@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://sharecodeadmin:sharecode2022@localhost:5432/database_sharecode?schema=public"
+}
+
+model User {
+  id          String   @id @default(uuid())
+  gh_username String
+  name        String
+  email       String   @unique
+  password    String
+  is_admin    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+
+  @@map("users")
+}
