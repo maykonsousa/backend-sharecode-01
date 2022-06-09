@@ -8,8 +8,8 @@ import {
 
 export class PrismaUsersRepository implements IUsersRepository {
   async findByEmail(email: string): Promise<IUser | null> {
-    const user = await prismaClient.user.findMany();
-    return user[0];
+    const user = await prismaClient.user.findUnique({ where: { email } });
+    return user;
   }
   async findAll(): Promise<IUser[]> {
     const users = await prismaClient.user.findMany();

@@ -14,23 +14,6 @@ services:
     volumes:
       - pgdata:/data/postgres
 
-  app:
-    build: .
-    container_name: sharecode
-    restart: always
-    ports:
-      - 3333:3333
-      - 9229:9229
-    environment:
-      - DB_PORT=5432
-      - DB_HOST=database_sharecode
-
-    volumes:
-      - .:/usr/app
-    links:
-      - "database_sharecode"
-    depends_on:
-      - "database_sharecode"
 
 volumes:
   pgdata:
