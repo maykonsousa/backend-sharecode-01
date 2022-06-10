@@ -1,8 +1,8 @@
-import { ICreateUserDTO } from '@modules/accounts/dtos/UsersDTOs';
-import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
-import { IUser } from 'database/entities/User';
+import { User } from 'database/entities/User';
 import { inject, injectable } from 'tsyringe';
 import { hash } from 'bcrypt';
+import { IUsersRepository } from 'modules/accounts/repositories/IUsersRepository';
+import { ICreateUserDTO } from 'modules/accounts/dtos/UsersDTOs';
 
 @injectable()
 export class CreateUserUseCase {
@@ -15,7 +15,10 @@ export class CreateUserUseCase {
     name,
     email,
     password,
-  }: ICreateUserDTO): Promise<IUser> {
+  }: ICreateUserDTO): Promise<User> {
+    if (!email) {
+      throw new Error('Email is required');
+    }
     const userExists = await this.usersRepository.findByEmail(email);
     if (userExists) {
       throw new Error('User already exists');
