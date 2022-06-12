@@ -1,0 +1,41 @@
+{
+	"name": "eslint-plugin-import-helpers",
+	"version": "1.2.1",
+	"description": "ESLint Rules to Aid with Imports",
+	"main": "lib/index.js",
+	"scripts": {
+		"build": "gulp src",
+		"prepublish": "npm run build",
+		"test": "npm run build && npm run test-quick",
+		"test-quick": "NODE_PATH=./lib nyc -s mocha -R dot --recursive test -t test-results"
+	},
+	"keywords": [
+		"eslint",
+		"import",
+		"eslint-plugin-import",
+		"configurable"
+	],
+	"repository": {
+		"url": "https://github.com/Tibfib/eslint-plugin-import-helpers.git"
+	},
+	"author": "Will Honey",
+	"license": "MIT",
+	"peerDependencies": {
+		"eslint": "5.x - 8.x"
+	},
+	"devDependencies": {
+		"@types/node": "^14.17.33",
+		"@typescript-eslint/parser": "^5.3.1",
+		"eslint": "^8.2.0",
+		"gulp": "^3.9.0",
+		"gulp-typescript": "^5.0.1",
+		"mocha": "^6.1.2",
+		"nyc": "^13.3.0",
+		"rimraf": "^3.0.2",
+		"typescript": "^4.4.4"
+	},
+	"dependencies": {},
+	"resolutions": {
+		"graceful-fs": "4.2.3"
+	}
+}
