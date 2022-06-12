@@ -1,5 +1,9 @@
 # SHARECODE  - BACKEND
 
+<div style="display:flex; align-items:center; justify-content:center; margin-bottom:20px">
+<img src="logo.png" >
+</div>
+
 Essa aplicação é um projeto em andameento que visa construir uma plataforma para compartilhamento de conteúdo em video voltado para desenvolvedores.
 
 A idéia é: imagine que você viu um video bacana do Diego da Rocketseat e queira compartilhar esse video com os membros de nossa comunidade ou até mesmo salvá-lo como privado e deixá-lo disponível para assistir com mais calma em outro momento.
