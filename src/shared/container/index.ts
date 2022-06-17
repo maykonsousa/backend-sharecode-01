@@ -4,6 +4,7 @@ import { ITokensRepository } from 'modules/accounts/repositories/ITokensReposito
 import { IUsersRepository } from 'modules/accounts/repositories/IUsersRepository';
 import { container } from 'tsyringe';
 import './providers/DateProvider';
+import './providers/MailProvider';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',

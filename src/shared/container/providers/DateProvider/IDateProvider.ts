@@ -6,7 +6,8 @@ export interface dateTypes {
     | 'hours'
     | 'minutes'
     | 'seconds'
-    | 'milliseconds';
+    | 'milliseconds'
+    | string;
   value?: number;
   startDate?: Date;
   endDate?: Date;
@@ -15,7 +16,8 @@ export interface dateTypes {
 }
 
 export interface IDateProvider {
-  add({ date, value }: dateTypes): Date;
+  addDays({ date, value }: dateTypes): Date;
+  addHours({ date, value }: dateTypes): Date;
   dateNow(): Date;
   formatDate({ date, format }: dateTypes): string;
   compare({ startDate, endDate, unit }: dateTypes): number;

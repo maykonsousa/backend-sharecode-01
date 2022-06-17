@@ -1,9 +1,15 @@
 import { dateTypes, IDateProvider } from '../IDateProvider';
-import { DateTime } from 'luxon';
+import { DateTime, Duration } from 'luxon';
 export class LuxonDateProvider implements IDateProvider {
-  add({ date, value }: dateTypes): Date {
+  addDays({ date, value }: dateTypes): Date {
     return DateTime.fromJSDate(date as Date)
       .plus({ days: value })
+      .toJSDate();
+  }
+
+  addHours({ date, value }: dateTypes): Date {
+    return DateTime.fromJSDate(date as Date)
+      .plus({ hours: value })
       .toJSDate();
   }
 
