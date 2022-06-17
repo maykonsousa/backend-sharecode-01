@@ -1,10 +1,14 @@
+import { TokensRepositoryInMemory } from 'modules/accounts/repositories/inMemory/TokensRepositoryInMemory';
 import { UsersRepositoryInMemory } from 'modules/accounts/repositories/inMemory/UsersRepositoryInMemory';
+import { LuxonDateProvider } from 'shared/container/providers/DateProvider/implementations/LuxonDateProvider';
 import { CreateUserUseCase } from '../CreateUser/CreateUserUseCase';
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
 
 describe('AuthenticateUserUseCase', () => {
   let usersRepositoryInMemory: UsersRepositoryInMemory;
+  let tokensRepositoryInMemory: TokensRepositoryInMemory;
   let authenticateUserUseCase: AuthenticateUserUseCase;
+  let dateProvider: LuxonDateProvider;
   let creteUseruseCase: CreateUserUseCase;
 
   const userData = {
@@ -16,8 +20,12 @@ describe('AuthenticateUserUseCase', () => {
 
   beforeEach(async () => {
     usersRepositoryInMemory = new UsersRepositoryInMemory();
+    tokensRepositoryInMemory = new TokensRepositoryInMemory();
+    dateProvider = new LuxonDateProvider();
     authenticateUserUseCase = new AuthenticateUserUseCase(
-      usersRepositoryInMemory
+      usersRepositoryInMemory,
+      tokensRepositoryInMemory,
+      dateProvider
     );
     creteUseruseCase = new CreateUserUseCase(usersRepositoryInMemory);
     await creteUseruseCase.execute(userData);

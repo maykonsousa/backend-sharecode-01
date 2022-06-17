@@ -21,5 +21,21 @@ model User {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now())
 
+  Token Token[]
   @@map("users")
+}
+
+model Token {
+  id         String   @id @default(uuid())
+  token      String   @unique
+  user_id    String
+  type       String
+  is_revoked Boolean
+  expires_at DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+  User       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+
+  @@map("tokens")
 }
