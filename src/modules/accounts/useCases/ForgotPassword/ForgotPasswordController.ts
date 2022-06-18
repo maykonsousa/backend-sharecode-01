@@ -7,8 +7,10 @@ export class ForgotPasswordController {
     const { email } = req.body;
     const forgotPasswordUseCase = container.resolve(ForgotPasswordUseCase);
     try {
-      await forgotPasswordUseCase.execute(email);
-      return res.status(200).json({ message: 'recovery e-email is send' });
+      const token = await forgotPasswordUseCase.execute(email);
+      return res
+        .status(200)
+        .json({ message: 'recovery e-email is send', token });
     } catch (error) {
       if (error instanceof Error) {
         return res.status(400).json({ message: error.message });

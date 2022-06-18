@@ -18,7 +18,7 @@ export class ForgotPasswordUseCase {
     private dateProvider: IDateProvider
   ) {}
 
-  async execute(email: string): Promise<void> {
+  async execute(email: string): Promise<string> {
     //localiza usuário
     const user = await this.usersRepository.findByEmail(email);
 
@@ -47,5 +47,7 @@ export class ForgotPasswordUseCase {
       body: `<p>Para resetar sua senha, clique no link abaixo:
       <a href="http://localhost:3000/reset?token=${token}">Resetar Senha</a></p>`,
     });
+
+    return token;
   }
 }

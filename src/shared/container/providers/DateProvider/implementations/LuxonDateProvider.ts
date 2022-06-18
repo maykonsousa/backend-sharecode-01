@@ -21,7 +21,7 @@ export class LuxonDateProvider implements IDateProvider {
     return DateTime.fromJSDate(date as Date).toFormat(format as string);
   }
 
-  compare({ startDate, endDate, unit }: dateTypes): number {
+  compare({ startDate, endDate, unit = 'days' }: dateTypes): number {
     const start = DateTime.fromISO(`${startDate}`);
     const end = DateTime.fromISO(`${endDate}`);
     return start.diff(end, unit as any).valueOf();
