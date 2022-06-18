@@ -58,7 +58,7 @@ export class AuthenticateUserUseCase {
       await this.tokenRepository.delete(oldRefreshToken.id as string);
     }
 
-    const expires_at = this.dateProvider.add({
+    const expires_at = this.dateProvider.addDays({
       date: this.dateProvider.dateNow(),
       value: 30,
     });
