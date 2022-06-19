@@ -6,10 +6,10 @@
       "decorators": true,
       "dynamicImport": false
     },
-    "target": "es2017"
+    "target": "es2018"
   },
   "module": {
     "type": "commonjs",
-    "noInterop": true
+    "noInterop": false
   }
 }

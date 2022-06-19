@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn --exit-child src/shared/http/server.ts",
-    "test": "jest --runInBand",
+    "test": "jest",
     "test:e2e": "jest --config jest-e2e.config.ts"
   },
   "dependencies": {
