@@ -31,13 +31,17 @@ export class ResetPasswordUseCase {
       throw new Error('Token is not valid');
     }
 
+    const startDate = tokenData.expires_at;
+    const endDate = this.dateProvider.dateNow();
+
     //verifica se o token ainda não expirou
     const isExpired =
       this.dateProvider.compare({
-        startDate: tokenData.expires_at,
-        endDate: this.dateProvider.dateNow(),
+        startDate,
+        endDate,
         unit: 'minutes',
-      }) > 0;
+      }) <= 0;
+
     if (isExpired) {
       throw new Error('Token expired');
     }

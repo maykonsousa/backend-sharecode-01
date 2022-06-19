@@ -1,5 +1,5 @@
 import { dateTypes, IDateProvider } from '../IDateProvider';
-import { DateTime, Duration } from 'luxon';
+import { DateTime } from 'luxon';
 export class LuxonDateProvider implements IDateProvider {
   addDays({ date, value }: dateTypes): Date {
     return DateTime.fromJSDate(date as Date)
@@ -22,8 +22,9 @@ export class LuxonDateProvider implements IDateProvider {
   }
 
   compare({ startDate, endDate, unit = 'days' }: dateTypes): number {
-    const start = DateTime.fromISO(`${startDate}`);
-    const end = DateTime.fromISO(`${endDate}`);
-    return start.diff(end, unit as any).valueOf();
+    const start = DateTime.fromJSDate(startDate as Date);
+    const end = DateTime.fromJSDate(endDate as Date);
+    const diference = start.diff(end, unit)[unit];
+    return diference;
   }
 }

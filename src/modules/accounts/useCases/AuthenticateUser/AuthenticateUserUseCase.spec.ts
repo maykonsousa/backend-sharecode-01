@@ -31,29 +31,42 @@ describe('AuthenticateUserUseCase', () => {
     await creteUseruseCase.execute(userData);
   });
 
+  it('Should not be able to authenticate with non-existing user', async () => {
+    expect(async () => {
+      await authenticateUserUseCase.execute({
+        email: 'wrongemail@gmail.com',
+        password: 'wrongpassword',
+      });
+    }).rejects.toThrow('Invalid credentials');
+  });
+
+  it('Should not be able to authenticate with wrong password', async () => {
+    expect(async () => {
+      await authenticateUserUseCase.execute({
+        email: 'maykon.sousa@hotmail.com',
+        password: 'wrongpassword',
+      });
+    }).rejects.toThrow('Invalid credentials');
+  });
+
+  //delete old token
+  it('Should be able to delete old token', async () => {
+    const deleteToken = jest.spyOn(tokensRepositoryInMemory, 'delete');
+    await authenticateUserUseCase.execute({
+      email: userData.email,
+      password: userData.password,
+    });
+    await authenticateUserUseCase.execute({
+      email: userData.email,
+      password: userData.password,
+    });
+    expect(deleteToken).toHaveBeenCalled();
+  });
   it('should be able to authenticate user', async () => {
     const response = await authenticateUserUseCase.execute({
       email: userData.email,
       password: userData.password,
     });
     expect(response).toHaveProperty('token');
-  });
-
-  it('should not be able to authenticate user with wrong email', async () => {
-    expect(async () => {
-      await authenticateUserUseCase.execute({
-        email: 'wrong@email.com.br',
-        password: '123456',
-      });
-    }).rejects.toThrow('Invalid credentials');
-  });
-
-  it('should not be able to authenticate user with wrong password', async () => {
-    expect(async () => {
-      await authenticateUserUseCase.execute({
-        email: userData.email,
-        password: 'wrong-password',
-      });
-    }).rejects.toThrow('Invalid credentials');
   });
 });

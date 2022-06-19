@@ -6,8 +6,8 @@ export interface dateTypes {
     | 'hours'
     | 'minutes'
     | 'seconds'
-    | 'milliseconds'
-    | string;
+    | 'milliseconds';
+
   value?: number;
   startDate?: Date;
   endDate?: Date;

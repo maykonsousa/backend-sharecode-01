@@ -63,8 +63,6 @@ export class AuthenticateUserUseCase {
       value: 30,
     });
 
-    console.log('expires_at', expires_at);
-
     await this.tokenRepository.create({
       token: refreshToken,
       type: 'refresh',

@@ -4,9 +4,14 @@ import { ITokensRepository } from '../ITokensRepository';
 
 export class TokensRepositoryInMemory implements ITokensRepository {
   tokens: Token[] = [];
-  async create({ token, type, user_id }: ICreateTokenDTO): Promise<void> {
+  async create({
+    token,
+    type,
+    user_id,
+    expires_at,
+  }: ICreateTokenDTO): Promise<void> {
     const newToken = new Token();
-    Object.assign(newToken, { token, type, user_id });
+    Object.assign(newToken, { token, type, user_id, expires_at });
     this.tokens.push(newToken);
   }
   async findByToken(token: string): Promise<Token | null> {

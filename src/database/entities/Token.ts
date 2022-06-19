@@ -16,6 +16,7 @@ class Token {
       this.createdAt = new Date();
       this.updatedAt = new Date();
       this.is_revoked = false;
+      this.expires_at = new Date();
     }
   }
 }
