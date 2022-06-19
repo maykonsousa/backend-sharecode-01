@@ -2,7 +2,7 @@ import { UsersRepositoryInMemory } from '../../repositories/inMemory/UsersReposi
 import { CreateUserUseCase } from './CreateUserUseCase';
 
 describe('CreateUserUseCase', () => {
-  let usersRepositortInMemory: UsersRepositoryInMemory;
+  let usersRepositoryInMemory: UsersRepositoryInMemory;
   let createUserUseCase: CreateUserUseCase;
   const userData = {
     name: 'Maykon Sousa',
@@ -12,8 +12,8 @@ describe('CreateUserUseCase', () => {
   };
 
   beforeEach(() => {
-    usersRepositortInMemory = new UsersRepositoryInMemory();
-    createUserUseCase = new CreateUserUseCase(usersRepositortInMemory);
+    usersRepositoryInMemory = new UsersRepositoryInMemory();
+    createUserUseCase = new CreateUserUseCase(usersRepositoryInMemory);
   });
 
   it('should be able to create a new user', async () => {
