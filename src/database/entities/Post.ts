@@ -1,15 +1,15 @@
 import { v4 as uuid } from 'uuid';
 
 class Post {
-  id!: string;
+  id?: string;
   yt_url!: string;
   title!: string;
   description!: string;
-  is_private!: boolean;
-  is_active!: boolean;
+  is_private?: boolean;
+  is_active?: boolean;
   user_id!: string;
-  createdAt!: Date;
-  updatedAt!: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 
   constructor() {
     if (!this.id) {

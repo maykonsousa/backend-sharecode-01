@@ -15,7 +15,7 @@ export class PrismaPostsRepository implements IPostsRepository {
   }
 
   async findByYtUrl(yt_url: string): Promise<Post | null> {
-    const post = await prismaClient.posts.findUnique({ where: { yt_url } });
+    const post = await prismaClient.posts.findFirst({ where: { yt_url } });
     return post ? post : null;
   }
 

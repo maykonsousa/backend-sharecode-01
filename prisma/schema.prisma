@@ -16,10 +16,9 @@ model User {
   is_admin    Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now())
+  Posts       Posts[]
+  Token       Token[]
 
-
-  Token Token[]
-  Posts Posts[]
   @@map("users")
 }
 
@@ -39,14 +38,14 @@ model Token {
 
 model Posts {
   id          String   @id @default(uuid())
-  yt_url      String   @unique
+  yt_url      String
   title       String
   description String
-  is_private  Boolean  @default(false)
-  is_active   Boolean  @default(false)
   user_id     String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now())
+  is_private  Boolean  @default(false)
+  is_active   Boolean  @default(false)
   User        User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("posts")
