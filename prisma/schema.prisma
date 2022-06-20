@@ -39,11 +39,11 @@ model Token {
 
 model Posts {
   id          String   @id @default(uuid())
-  yt_url      String
+  yt_url      String   @unique
   title       String
   description String
-  is_private  String
-  is_active   String
+  is_private  Boolean  @default(false)
+  is_active   Boolean  @default(false)
   user_id     String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now())
