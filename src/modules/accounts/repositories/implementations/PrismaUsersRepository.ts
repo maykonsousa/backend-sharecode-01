@@ -31,10 +31,10 @@ export class PrismaUsersRepository implements IUsersRepository {
     });
     return newUser;
   }
-  async update(id: string, data: IUpdateUserDTO): Promise<User> {
-    return prismaClient.user.update({ where: { id }, data });
+  async update(id: string, data: IUpdateUserDTO): Promise<void> {
+    await prismaClient.user.update({ where: { id }, data });
   }
   async delete(id: string): Promise<void> {
-    prismaClient.user.delete({ where: { id } });
+    await prismaClient.user.delete({ where: { id } });
   }
 }

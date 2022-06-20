@@ -2,6 +2,8 @@ import { PrismaTokensRepository } from 'modules/accounts/repositories/implementa
 import { PrismaUsersRepository } from 'modules/accounts/repositories/implementations/PrismaUsersRepository';
 import { ITokensRepository } from 'modules/accounts/repositories/ITokensRepository';
 import { IUsersRepository } from 'modules/accounts/repositories/IUsersRepository';
+import { PrismaPostsRepository } from 'modules/posts/repositories/implementations/PrismaPostsRepository';
+import { IPostsRepository } from 'modules/posts/repositories/IPostsRepository';
 import { container } from 'tsyringe';
 import './providers/DateProvider';
 import './providers/MailProvider';
@@ -14,4 +16,9 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<ITokensRepository>(
   'TokensRepository',
   PrismaTokensRepository
+);
+
+container.registerSingleton<IPostsRepository>(
+  'PostsRepository',
+  PrismaPostsRepository
 );

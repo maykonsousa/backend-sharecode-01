@@ -1,0 +1,14 @@
+import { Post } from 'database/entities/Post';
+
+export interface IPostsRepository {
+  findAll(): Promise<Post[]>;
+  findById(id: string): Promise<Post | null>;
+  findByYtUrl(yt_url: string): Promise<Post | null>;
+  findByUserId(user_id: string): Promise<Post[]>;
+  create(data: Post): Promise<Post>;
+  active(id: string): Promise<Post>;
+  inactive(id: string): Promise<Post>;
+  deleteByUser(id: string): Promise<void>;
+  deleteByAdmin(id: string): Promise<void>;
+  setPrivacy(id: string, isPrivate: boolean): Promise<Post>;
+}

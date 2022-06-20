@@ -13,24 +13,24 @@ export const EnsureAuthenticated = (
 ) => {
   const authHeader = req.headers.authorization;
   if (!authHeader) {
-    return res.status(401).json({ message: 'Token not provided' });
+    return res.status(401).json({ error: 'Token not provided' });
   }
   const [, token] = authHeader.split(' ');
 
   try {
     const { sub: userId } = verify(
       token,
-      `${process.env.JWT_SECRET}`
+      `${process.env.TOKEN_SECRET}`
     ) as IPayload;
     const usersRepository = new PrismaUsersRepository();
     const user = usersRepository.findById(userId);
     if (!user) {
-      return res.status(401).json({ message: 'User not found' });
+      return res.status(401).json({ error: 'User not found' });
     }
 
     req.user = { id: userId };
     return next();
   } catch (error) {
-    return res.status(401).json({ message: 'Token invalid' });
+    return res.status(401).json({ error: 'Token invalid' });
   }
 };
