@@ -5,6 +5,8 @@ import { router } from './routes';
 
 import '../container/index';
 
-export const app = express();
+const app = express();
 app.use(express.json());
 app.use(router);
+
+export { app };
