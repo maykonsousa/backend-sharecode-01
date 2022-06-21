@@ -13,8 +13,8 @@ export class PrismaPostsRepository implements IPostsRepository {
   }
 
   async findById(id: string): Promise<Post | null> {
-    const post = await prismaClient.posts.findUnique({
-      where: { id },
+    const post = await prismaClient.posts.findFirst({
+      where: { id, is_active: true },
       include: { User: true },
     });
     return post || null;

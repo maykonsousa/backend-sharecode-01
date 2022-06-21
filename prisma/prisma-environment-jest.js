@@ -25,7 +25,6 @@ class CustomEnvironment extends NodeEnvironment {
     process.env.DATABASE_URL = this.connectionString;
     this.global.process.env.DATABASE_URL = this.connectionString;
     execSync(`${prismaCLI} migrate dev`);
-    execSync(`${prismaCLI} db pull`);
   }
 
   async teardown() {
