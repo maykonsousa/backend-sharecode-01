@@ -4,7 +4,7 @@ import { CreatePostUseCase } from './CreatePostUseCase';
 
 export class CreatePostController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { yt_url, title, description, is_private } = req.body;
+    const { yt_url, title, description, is_private, is_active } = req.body;
     const { id: user_id } = req.user;
     const createPostUseCase = container.resolve(CreatePostUseCase);
     try {
@@ -14,6 +14,7 @@ export class CreatePostController {
         title,
         description,
         is_private,
+        is_active,
       });
       return res.status(201).json(post);
     } catch (error) {

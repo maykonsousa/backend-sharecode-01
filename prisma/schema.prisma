@@ -31,7 +31,7 @@ model Token {
   expires_at DateTime
   createdAt  DateTime @default(now())
   updatedAt  DateTime @default(now())
-  User       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  User       User     @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "fk_UserId")
 
   @@map("tokens")
 }
@@ -46,7 +46,7 @@ model Posts {
   updatedAt   DateTime @default(now())
   is_private  Boolean  @default(false)
   is_active   Boolean  @default(false)
-  User        User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  User        User     @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "FK_UserId")
 
   @@map("posts")
 }

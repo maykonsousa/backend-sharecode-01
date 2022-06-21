@@ -1,4 +1,5 @@
 import { Post } from 'database/entities/Post';
+import { ICreatePostDTO } from 'modules/accounts/dtos';
 import { IPostsRepository } from '../IPostsRepository';
 
 export class PostsRepositoryInMemory implements IPostsRepository {
@@ -9,7 +10,7 @@ export class PostsRepositoryInMemory implements IPostsRepository {
   }
 
   async findById(id: string): Promise<Post | null> {
-    const post = this.posts.find((post) => post.id === id);
+    const post = this.posts.find((post) => post.id === id && post.is_active);
     return post || null;
   }
 
@@ -22,7 +23,7 @@ export class PostsRepositoryInMemory implements IPostsRepository {
     return this.posts.filter((post) => post.user_id === user_id);
   }
 
-  async create(data: Post): Promise<Post> {
+  async create(data: ICreatePostDTO): Promise<Post> {
     const post = new Post();
     Object.assign(post, data);
     this.posts.push(post);
@@ -57,5 +58,12 @@ export class PostsRepositoryInMemory implements IPostsRepository {
     const post = this.posts[postIndex];
     Object.assign(post, { is_private });
     return post;
+  }
+
+  async findByStatus(status: 'active' | 'inactive'): Promise<Post[]> {
+    const posts = this.posts.filter(
+      (post) => post.is_active === (status === 'active')
+    );
+    return posts;
   }
 }

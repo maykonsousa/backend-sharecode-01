@@ -1,7 +1,7 @@
 import { Post } from 'database/entities/Post';
 
 export interface IPostsRepository {
-  findAll(): Promise<Post[]>;
+  findByStatus(status: 'active' | 'inactive'): Promise<Post[]>;
   findById(id: string): Promise<Post | null>;
   findByYtUrl(yt_url: string): Promise<Post | null>;
   findByUserId(user_id: string): Promise<Post[]>;

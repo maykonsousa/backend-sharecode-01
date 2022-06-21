@@ -4,13 +4,19 @@ import { ICreatePostDTO } from 'modules/accounts/dtos';
 import { IPostsRepository } from '../IPostsRepository';
 
 export class PrismaPostsRepository implements IPostsRepository {
-  async findAll(): Promise<Post[]> {
-    const posts = await prismaClient.posts.findMany();
+  async findByStatus(status: 'active' | 'inactive'): Promise<Post[]> {
+    const posts = await prismaClient.posts.findMany({
+      where: { is_active: status === 'active' ? true : false },
+      include: { User: true },
+    });
     return posts;
   }
 
   async findById(id: string): Promise<Post | null> {
-    const post = await prismaClient.posts.findUnique({ where: { id } });
+    const post = await prismaClient.posts.findFirst({
+      where: { id, is_active: true },
+      include: { User: true },
+    });
     return post || null;
   }
 
@@ -20,7 +26,9 @@ export class PrismaPostsRepository implements IPostsRepository {
   }
 
   async findByUserId(user_id: string): Promise<Post[]> {
-    const posts = await prismaClient.posts.findMany({ where: { user_id } });
+    const posts = await prismaClient.posts.findMany({
+      where: { user_id, is_active: true },
+    });
     return posts;
   }
 

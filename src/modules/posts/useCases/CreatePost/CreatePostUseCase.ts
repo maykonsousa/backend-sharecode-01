@@ -19,6 +19,7 @@ export class CreatePostUseCase {
     title,
     description,
     is_private,
+    is_active,
   }: ICreatePostDTO): Promise<Post> {
     const user = await this.usersRepository.findById(user_id);
     if (!user) {
@@ -37,6 +38,7 @@ export class CreatePostUseCase {
       title,
       description,
       is_private,
+      is_active,
     });
 
     //TODO: send email to user
