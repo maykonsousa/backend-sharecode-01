@@ -3,7 +3,7 @@ import { Post } from 'database/entities/Post';
 export interface IPostsRepository {
   findByStatus(status: 'active' | 'inactive'): Promise<Post[]>;
   findById(id: string): Promise<Post | null>;
-  findByYtUrl(yt_url: string): Promise<Post | null>;
+  findByVideoId(id: string): Promise<Post | null>;
   findByUserId(user_id: string): Promise<Post[]>;
   create(data: Post): Promise<Post>;
   active(id: string): Promise<Post>;

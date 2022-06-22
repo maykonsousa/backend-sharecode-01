@@ -14,8 +14,8 @@ export class PostsRepositoryInMemory implements IPostsRepository {
     return post || null;
   }
 
-  async findByYtUrl(yt_url: string): Promise<Post | null> {
-    const post = this.posts.find((post) => post.yt_url === yt_url);
+  async findByVideoId(video_id: string): Promise<Post | null> {
+    const post = this.posts.find((post) => post.video_id === video_id);
     return post || null;
   }
 
