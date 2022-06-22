@@ -38,7 +38,7 @@ model Token {
 
 model Posts {
   id          String   @id @default(uuid())
-  yt_url      String
+  video_id    String
   title       String
   description String
   user_id     String

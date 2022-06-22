@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 
 class Post {
   id?: string;
-  yt_url!: string;
+  video_id!: string;
   title!: string;
   description!: string;
   is_private?: boolean;
