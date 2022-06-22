@@ -15,7 +15,7 @@ export class CreatePostUseCase {
 
   async execute({
     user_id,
-    yt_url,
+    video_id,
     title,
     description,
     is_private,
@@ -26,7 +26,7 @@ export class CreatePostUseCase {
       throw new Error('User not found');
     }
 
-    const postFound = await this.postsRepository.findByYtUrl(yt_url);
+    const postFound = await this.postsRepository.findByVideoId(video_id);
 
     if (postFound) {
       throw new Error('Post already exists');
@@ -34,7 +34,7 @@ export class CreatePostUseCase {
 
     const post = await this.postsRepository.create({
       user_id,
-      yt_url,
+      video_id,
       title,
       description,
       is_private,
