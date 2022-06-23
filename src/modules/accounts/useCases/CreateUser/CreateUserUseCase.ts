@@ -15,6 +15,7 @@ export class CreateUserUseCase {
     name,
     email,
     password,
+    type,
   }: ICreateUserDTO): Promise<User> {
     if (!email) {
       throw new Error('Email is required');
@@ -31,6 +32,7 @@ export class CreateUserUseCase {
       name,
       email,
       password: encryptedPassword,
+      type,
     });
 
     return user;

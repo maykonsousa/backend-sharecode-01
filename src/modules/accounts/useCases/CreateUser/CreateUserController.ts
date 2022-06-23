@@ -4,7 +4,7 @@ import { CreateUserUseCase } from './CreateUserUseCase';
 
 export class CreateUserController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { gh_username, name, email, password } = req.body;
+    const { gh_username, name, email, password, type } = req.body;
     const creatUserUseCase = container.resolve(CreateUserUseCase);
     try {
       const user = await creatUserUseCase.execute({
@@ -12,6 +12,7 @@ export class CreateUserController {
         name,
         email,
         password,
+        type,
       });
       return res.status(201).json(user);
     } catch (error) {

@@ -13,7 +13,7 @@ model User {
   name        String
   email       String   @unique
   password    String
-  is_admin    Boolean  @default(false)
+  type        String   @default("user")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now())
   Posts       Posts[]

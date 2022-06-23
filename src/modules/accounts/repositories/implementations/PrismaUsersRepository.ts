@@ -8,15 +8,19 @@ import {
 
 export class PrismaUsersRepository implements IUsersRepository {
   async findByEmail(email: string): Promise<User | null> {
-    const user = await prismaClient.user.findUnique({ where: { email } });
+    const user = (await prismaClient.user.findUnique({
+      where: { email },
+    })) as User;
     return user;
   }
   async findAll(): Promise<User[]> {
-    const users = await prismaClient.user.findMany();
+    const users = (await prismaClient.user.findMany()) as User[];
     return users;
   }
   async findById(id: string): Promise<User | null> {
-    const user = await prismaClient.user.findUnique({ where: { id } });
+    const user = (await prismaClient.user.findUnique({
+      where: { id },
+    })) as User;
     return user;
   }
 
@@ -25,10 +29,11 @@ export class PrismaUsersRepository implements IUsersRepository {
     name,
     email,
     password,
+    type,
   }: ICreateUserDTO): Promise<User> {
-    const newUser = await prismaClient.user.create({
-      data: { gh_username, name, email, password },
-    });
+    const newUser = (await prismaClient.user.create({
+      data: { gh_username, name, email, password, type },
+    })) as User;
     return newUser;
   }
   async update(id: string, data: IUpdateUserDTO): Promise<void> {

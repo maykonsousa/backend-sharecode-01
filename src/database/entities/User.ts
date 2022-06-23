@@ -6,7 +6,7 @@ class User {
   name!: string;
   email!: string;
   password!: string;
-  is_admin?: boolean;
+  type?: 'user' | 'admin' | 'moderator';
   createdAt?: Date;
   updatedAt?: Date;
 
@@ -15,7 +15,9 @@ class User {
       this.id = uuid();
       this.createdAt = new Date();
       this.updatedAt = new Date();
-      this.is_admin = false;
+    }
+    if (!this.type) {
+      this.type = 'user';
     }
   }
 }

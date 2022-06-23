@@ -3,6 +3,7 @@ export interface ICreateUserDTO {
   name: string;
   email: string;
   password: string;
+  type?: 'user' | 'admin' | 'moderator';
 }
 
 export interface IUpdateUserDTO {
