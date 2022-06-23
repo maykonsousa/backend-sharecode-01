@@ -20,8 +20,11 @@ export class PrismaPostsRepository implements IPostsRepository {
     return post || null;
   }
 
-  async findByYtUrl(yt_url: string): Promise<Post | null> {
-    const post = await prismaClient.posts.findFirst({ where: { yt_url } });
+  async findByVideoId(video_id: string): Promise<Post | null> {
+    const post = await prismaClient.posts.findFirst({
+      where: { video_id },
+      include: { User: true },
+    });
     return post ? post : null;
   }
 
