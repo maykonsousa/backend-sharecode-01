@@ -20,9 +20,10 @@ export class UsersRepositoryInMemory implements IUsersRepository {
     email,
     gh_username,
     password,
+    type,
   }: ICreateUserDTO): Promise<User> {
     const user = new User();
-    Object.assign(user, { name, email, password, gh_username });
+    Object.assign(user, { name, email, password, gh_username, type });
     this.users.push(user);
     return user;
   }
