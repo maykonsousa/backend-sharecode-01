@@ -8,6 +8,8 @@ export interface ICreateUserDTO {
 
 export interface IUpdateUserDTO {
   password?: string;
+  name?: string;
+  type?: 'user' | 'admin' | 'moderator';
 }
 
 export interface ICreateTokenDTO {
