@@ -27,10 +27,10 @@ export class UsersRepositoryInMemory implements IUsersRepository {
     this.users.push(user);
     return user;
   }
-  async update(id: string, { password }: IUpdateUserDTO): Promise<void> {
+  async update(id: string, data: IUpdateUserDTO): Promise<void> {
     const userIndex = this.users.findIndex((user) => user.id === id);
     const user = this.users[userIndex];
-    Object.assign(user, { password });
+    Object.assign(user, { ...data });
   }
   async delete(id: string): Promise<void> {
     throw new Error('Method not implemented.');
