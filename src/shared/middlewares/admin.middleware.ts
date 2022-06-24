@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { PrismaUsersRepository } from 'modules/accounts/repositories/implementations/PrismaUsersRepository';
 
-export const EnsuresModerator = async (
+export const EnsuresAdmin = async (
   req: Request,
   res: Response,
   next: NextFunction
