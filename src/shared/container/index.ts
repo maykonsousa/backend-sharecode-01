@@ -4,7 +4,7 @@ import { ITokensRepository } from 'modules/accounts/repositories/ITokensReposito
 import { IUsersRepository } from 'modules/accounts/repositories/IUsersRepository';
 import { PrismaPostsRepository } from 'modules/posts/repositories/implementations/PrismaPostsRepository';
 import { IPostsRepository } from 'modules/posts/repositories/IPostsRepository';
-import { container } from 'tsyringe';
+import { container, delay } from 'tsyringe';
 import './providers/DateProvider';
 import './providers/MailProvider';
 
@@ -20,5 +20,5 @@ container.registerSingleton<ITokensRepository>(
 
 container.registerSingleton<IPostsRepository>(
   'PostsRepository',
-  PrismaPostsRepository
+  delay(() => PrismaPostsRepository)
 );

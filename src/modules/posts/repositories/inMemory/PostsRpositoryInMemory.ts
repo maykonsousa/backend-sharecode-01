@@ -20,7 +20,9 @@ export class PostsRepositoryInMemory implements IPostsRepository {
   }
 
   async findByUserId(user_id: string): Promise<Post[]> {
-    return this.posts.filter((post) => post.user_id === user_id);
+    return this.posts.filter(
+      (post) => post.user_id === user_id && post.is_active
+    );
   }
 
   async create(data: ICreatePostDTO): Promise<Post> {
