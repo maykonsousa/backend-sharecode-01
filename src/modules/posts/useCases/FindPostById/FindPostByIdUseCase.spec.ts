@@ -7,7 +7,7 @@ let postsRepository: PostsRepositoryInMemory;
 let findPostByIdUseCase: FindPostByIdUseCase;
 
 const postData = {
-  yt_url: 'https://www.youtube.com/watch?v=bOdrGg5oc3E',
+  video_id: 'https://www.youtube.com/watch?v=bOdrGg5oc3E',
   title: 'Algumas Dicas de CSS - Willian Justen',
   description:
     'Willian Faz uma revisão de um código CSS dando dicas fundamentais',
