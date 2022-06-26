@@ -3,10 +3,22 @@ import { Post } from 'database/entities/Post';
 import { ICreatePostDTO } from 'modules/accounts/dtos';
 import { IPostsRepository } from '../IPostsRepository';
 
+interface IRequestStatus {
+  status: 'active' | 'inactive';
+  page?: number;
+  limit?: number;
+}
+
 export class PrismaPostsRepository implements IPostsRepository {
-  async findByStatus(status: 'active' | 'inactive'): Promise<Post[]> {
+  async findByStatus({
+    status,
+    page = 1,
+    limit = 20,
+  }: IRequestStatus): Promise<Post[]> {
     const posts = await prismaClient.posts.findMany({
       where: { is_active: status === 'active' ? true : false },
+      skip: page * limit,
+      take: limit,
       include: { User: true },
     });
     return posts;
