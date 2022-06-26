@@ -33,6 +33,15 @@ export class PrismaUsersRepository implements IUsersRepository {
   }: ICreateUserDTO): Promise<User> {
     const newUser = (await prismaClient.user.create({
       data: { gh_username, name, email, password, type },
+      select: {
+        id: true,
+        gh_username: true,
+        name: true,
+        email: true,
+        type: true,
+        createdAt: true,
+        updatedAt: true,
+      },
     })) as User;
     return newUser;
   }

@@ -15,7 +15,16 @@ export class PrismaPostsRepository implements IPostsRepository {
   async findById(id: string): Promise<Post | null> {
     const post = await prismaClient.posts.findFirst({
       where: { id, is_active: true },
-      include: { User: true },
+      include: {
+        User: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            gh_username: true,
+          },
+        },
+      },
     });
     return post || null;
   }
@@ -23,7 +32,16 @@ export class PrismaPostsRepository implements IPostsRepository {
   async findByVideoId(video_id: string): Promise<Post | null> {
     const post = await prismaClient.posts.findFirst({
       where: { video_id },
-      include: { User: true },
+      include: {
+        User: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            gh_username: true,
+          },
+        },
+      },
     });
     return post ? post : null;
   }
