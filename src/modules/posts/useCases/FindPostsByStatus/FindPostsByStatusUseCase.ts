@@ -15,8 +15,11 @@ export class FindPostsByStatusUseCase {
     private postsRepository: IPostsRepository
   ) {}
 
-  async execute({ status, page, limit }: IRequest): Promise<Post[]> {
-    if (!status) throw new Error('Status is required');
+  async execute({ status, page = 1, limit = 20 }: IRequest): Promise<Post[]> {
+    console.log('entrou na classe');
+    if (!status) {
+      throw new Error('Status is required');
+    }
     const posts = await this.postsRepository.findByStatus({
       status,
       page,

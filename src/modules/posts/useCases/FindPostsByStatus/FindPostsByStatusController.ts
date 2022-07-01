@@ -4,22 +4,23 @@ import { FindPostsByStatusUseCase } from './FindPostsByStatusUseCase';
 
 interface IRequest {
   status: 'active' | 'inactive';
-  page: number;
-  limit: number;
+  page?: number;
+  limit?: number;
 }
 
 export class FindPostsByStatusController {
   async handle(req: Request, res: Response): Promise<Response> {
     const { status, page, limit } = req.query;
-    const findPostsByStatususeCase = container.resolve(
-      FindPostsByStatusUseCase
-    );
+
     try {
-      const posts = await findPostsByStatususeCase.execute({
+      const findPostsByStatusUseCase = container.resolve(
+        FindPostsByStatusUseCase
+      );
+      const posts = await findPostsByStatusUseCase.execute({
         status,
         page,
         limit,
-      } as unknown as IRequest);
+      } as IRequest);
       return res.status(200).json(posts);
     } catch (error) {
       if (error instanceof Error) {
