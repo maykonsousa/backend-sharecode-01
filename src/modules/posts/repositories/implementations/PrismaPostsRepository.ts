@@ -3,11 +3,32 @@ import { Post } from 'database/entities/Post';
 import { ICreatePostDTO } from 'modules/accounts/dtos';
 import { IPostsRepository } from '../IPostsRepository';
 
+interface IRequestStatus {
+  status: 'active' | 'inactive';
+  page?: number;
+  limit?: number;
+}
+
 export class PrismaPostsRepository implements IPostsRepository {
-  async findByStatus(status: 'active' | 'inactive'): Promise<Post[]> {
+  async findByStatus({
+    status,
+    page = 1,
+    limit = 20,
+  }: IRequestStatus): Promise<Post[]> {
     const posts = await prismaClient.posts.findMany({
       where: { is_active: status === 'active' ? true : false },
-      include: { User: true },
+      skip: page === 1 ? 0 : (page - 1) * limit,
+      take: limit,
+      include: {
+        User: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            gh_username: true,
+          },
+        },
+      },
     });
     return posts;
   }
@@ -15,7 +36,16 @@ export class PrismaPostsRepository implements IPostsRepository {
   async findById(id: string): Promise<Post | null> {
     const post = await prismaClient.posts.findFirst({
       where: { id, is_active: true },
-      include: { User: true },
+      include: {
+        User: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            gh_username: true,
+          },
+        },
+      },
     });
     return post || null;
   }
@@ -23,7 +53,16 @@ export class PrismaPostsRepository implements IPostsRepository {
   async findByVideoId(video_id: string): Promise<Post | null> {
     const post = await prismaClient.posts.findFirst({
       where: { video_id },
-      include: { User: true },
+      include: {
+        User: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            gh_username: true,
+          },
+        },
+      },
     });
     return post ? post : null;
   }

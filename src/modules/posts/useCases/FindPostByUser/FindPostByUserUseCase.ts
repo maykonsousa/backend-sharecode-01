@@ -1,3 +1,4 @@
+import { Post } from 'database/entities/Post';
 import { IUsersRepository } from 'modules/accounts/repositories/IUsersRepository';
 import { IPostsRepository } from 'modules/posts/repositories/IPostsRepository';
 import { inject, injectable } from 'tsyringe';
@@ -11,7 +12,7 @@ export class FindPostsByUserUseCase {
     private usersRepository: IUsersRepository
   ) {}
 
-  async execute(user_id: string) {
+  async execute(user_id: string): Promise<Post[]> {
     if (!user_id) {
       throw new Error('User id is required');
     }
