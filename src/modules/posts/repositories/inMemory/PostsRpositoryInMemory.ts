@@ -1,6 +1,6 @@
 import { Post } from 'database/entities/Post';
 import { ICreatePostDTO } from 'modules/accounts/dtos';
-import { IPostsRepository } from '../IPostsRepository';
+import { IPostsRepository, IRequestStatus } from '../IPostsRepository';
 
 export class PostsRepositoryInMemory implements IPostsRepository {
   posts: Post[] = [];
@@ -62,10 +62,16 @@ export class PostsRepositoryInMemory implements IPostsRepository {
     return post;
   }
 
-  async findByStatus(status: 'active' | 'inactive'): Promise<Post[]> {
-    const posts = this.posts.filter(
-      (post) => post.is_active === (status === 'active')
-    );
+  async findByStatus({
+    page = 1,
+    limit = 20,
+    status,
+  }: IRequestStatus): Promise<Post[]> {
+    const start = (page - 1) * limit;
+    const end = page * limit;
+    const posts = this.posts
+      .filter((post) => post.is_active === (status === 'active'))
+      .slice(start, end);
     return posts;
   }
 }

@@ -17,9 +17,18 @@ export class PrismaPostsRepository implements IPostsRepository {
   }: IRequestStatus): Promise<Post[]> {
     const posts = await prismaClient.posts.findMany({
       where: { is_active: status === 'active' ? true : false },
-      skip: page * limit,
+      skip: page === 1 ? 0 : (page - 1) * limit,
       take: limit,
-      include: { User: true },
+      include: {
+        User: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            gh_username: true,
+          },
+        },
+      },
     });
     return posts;
   }

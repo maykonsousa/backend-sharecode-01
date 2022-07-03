@@ -1,6 +1,6 @@
 import { Post } from 'database/entities/Post';
 
-interface IRequestStatus {
+export interface IRequestStatus {
   status: 'active' | 'inactive';
   page?: number;
   limit?: number;

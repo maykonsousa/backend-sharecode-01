@@ -19,5 +19,5 @@ postsRoutes.post('/', createPostController.handle); // cria um post
 postsRoutes.get('/id/:id', findPostByIdController.handle); // busca um post por id
 postsRoutes.get('/user', findPostsByUserController.handle); // busca posts do usuário logado
 postsRoutes.get('/user/:user_id', findPostsByUserController.handle); // busca posts por usuário
-postsRoutes.get('/status', findPostsByStatus.handle); // busca posts por status
+postsRoutes.get('/status', findPostsByStatus.handle); // busca posts por status corrigido
 postsRoutes.get('/video/:video_id', findPostByVideoIdController.handle); // busca posts por id do vídeo do youtube

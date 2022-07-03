@@ -1,25 +1,21 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { FindPostsByStatusUseCase } from './FindPostsByStatusUseCase';
-
-interface IRequest {
-  status: 'active' | 'inactive';
-  page?: number;
-  limit?: number;
-}
+import { FindPostsByStatusUseCase, IRequest } from './FindPostsByStatusUseCase';
 
 export class FindPostsByStatusController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { status, page, limit } = req.query;
+    const { status, page = 1, limit = 20 } = req.query;
+    const pageParsed = parseInt(page as string);
+    const limitParsed = parseInt(limit as string);
 
     try {
-      const findPostsByStatusUseCase = container.resolve(
+      const findPostsByUserUseCase = container.resolve(
         FindPostsByStatusUseCase
       );
-      const posts = await findPostsByStatusUseCase.execute({
+      const posts = await findPostsByUserUseCase.execute({
         status,
-        page,
-        limit,
+        page: pageParsed,
+        limit: limitParsed,
       } as IRequest);
       return res.status(200).json(posts);
     } catch (error) {
@@ -28,7 +24,7 @@ export class FindPostsByStatusController {
           error: error.message,
         });
       }
-      return res.status(500).json({ error: 'Internal server error' });
+      return res.status(500).json({ error: 'Unexpected error' });
     }
   }
 }

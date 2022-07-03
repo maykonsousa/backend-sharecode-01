@@ -2,13 +2,13 @@ import { Post } from 'database/entities/Post';
 import { IPostsRepository } from 'modules/posts/repositories/IPostsRepository';
 import { inject, injectable } from 'tsyringe';
 
-interface IRequest {
+export interface IRequest {
   status: 'active' | 'inactive';
-  page?: number;
-  limit?: number;
+  page: number;
+  limit: number;
 }
 
-injectable();
+@injectable()
 export class FindPostsByStatusUseCase {
   constructor(
     @inject('PostsRepository')
@@ -16,7 +16,6 @@ export class FindPostsByStatusUseCase {
   ) {}
 
   async execute({ status, page = 1, limit = 20 }: IRequest): Promise<Post[]> {
-    console.log('entrou na classe');
     if (!status) {
       throw new Error('Status is required');
     }
